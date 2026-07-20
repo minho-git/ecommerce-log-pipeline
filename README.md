@@ -1,7 +1,6 @@
 # 이커머스 유저 행동 로그 파이프라인 (Log Pipeline Project)
 
 ## 프로젝트 목적
-데이터 엔지니어 인턴 준비를 위한 개인 프로젝트.
 실무 데이터 파이프라인 구조(Kafka → Spark → Medallion Architecture → Airflow)를
 로컬 환경(Docker Compose)에서 최대한 비슷하게 재현하는 것이 목표.
 
@@ -80,13 +79,14 @@
 ## 현재까지 진행 상황
 - [x] 로그 생성기 (`generate_logs.py`) - 완료. 7일치 가짜 로그를 
       `data/raw/YYYY-MM-DD.json` 형태로 생성함. 의도적으로 결측치/중복 포함.
-- [ ] Docker Compose로 Kafka 환경 구성
+- [x] Docker Compose로 Kafka 환경 구성 - 완료. KRaft 모드 단일 브로커 +
+      Kafka UI(`localhost:8080`). `docker compose up -d`로 실행.
 - [ ] Kafka Producer: 생성된 로그를 Kafka topic(`web-logs`)으로 전송
 - [ ] Kafka Consumer: topic에서 읽어서 Bronze(Parquet)로 저장
 - [ ] Silver 레이어: 정제 + 데이터 품질 체크 로직
 - [ ] Gold 레이어: 집계 로직
 - [ ] Airflow DAG 작성
-- [ ] README에 트레이드오프/설계 의도 문서화 (면접 대비용)
+- [ ] README에 트레이드오프/설계 의도 문서화
 
 ---
 
@@ -116,5 +116,5 @@
 ## 원칙
 - 각 단계는 독립적으로 실행 테스트 가능해야 함 (전체를 한 번에 안 돌려도 
   Bronze만, Silver만 따로 테스트 가능하게)
-- 코드에 주석으로 "왜 이렇게 설계했는지" 설명을 남길 것 (면접 스토리텔링용)
+- 코드에 주석으로 "왜 이렇게 설계했는지" 설명을 남길 것
 - 과도한 엔지니어링 지양: 로컬 개인 프로젝트 수준에 맞는 간결한 구현 우선
