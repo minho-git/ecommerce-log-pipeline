@@ -2,6 +2,7 @@ data/raw/*.json
 data/bronze/
 data/silver/
 data/gold/
+data/_checkpoints/
 __pycache__/
 *.pyc
 .venv/
